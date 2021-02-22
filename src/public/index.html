@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatty</title>
+    <style>
+        body {
+
+        }
+
+        .messageInput {
+            padding: 5px;
+        }
+
+        .messageList {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <ul class="messageList" id="messages"></ul>
+    <form id="messageForm">
+        <input class="messageInput" id="messageInput" />
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      const input = document.getElementById('messageInput');
+
+      document.getElementById('messageForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit('chat', input.value);
+          input.value = "";
+        }
+      });
+
+      socket.on('chat', (chat) => {
+        const messageLi = document.createElement('li');
+        const messageText = document.createTextNode(chat);
+        messageLi.appendChild(messageText);
+        document.getElementById('messages').appendChild(messageLi);
+      });
+    </script>
+</body>
+</html>

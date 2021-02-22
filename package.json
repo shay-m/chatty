@@ -1,0 +1,30 @@
+{
+  "name": "chatty",
+  "version": "1.0.0",
+  "description": "This is a basic chat room application that runs with socket.io and Express.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaymor/chatty.git"
+  },
+  "author": "Shay Mor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaymor/chatty/issues"
+  },
+  "homepage": "https://github.com/shaymor/chatty#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.1"
+  }
+}
