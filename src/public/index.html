@@ -3,24 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Chatty</title>
-    <style>
-        body {
-
-        }
-
-        .messageInput {
-            padding: 5px;
-        }
-
-        .messageList {
-            list-style-type: none;
-        }
-    </style>
 </head>
 <body>
-    <ul class="messageList" id="messages"></ul>
+    <ul id="messages"></ul>
     <form id="messageForm">
-        <input class="messageInput" id="messageInput" />
+        <input id="messageInput" autocomplete="off"/>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script>
