@@ -5,17 +5,30 @@
     <title>Chatty</title>
 </head>
 <body>
-    <ul id="messages"></ul>
+    <form id="usernameForm">
+        <input id="usernameInput" autocomplete="off" placeholder="Username"/>
+        <p id="usernameDisplay"></p>
+    </form>
+    <ul id="messages" style="list-style-type:none"></ul>
     <form id="messageForm">
-        <input id="messageInput" autocomplete="off"/>
+        <input id="messageInput" autocomplete="off" placeholder="Message"/>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
 
-      const input = document.getElementById('messageInput');
+      document.getElementById('usernameForm').addEventListener('submit', (e) => {
+        const input = document.getElementById('usernameInput');
+        e.preventDefault();
+        if (input.value) {
+          socket.emit('register', input.value);
+          input.style = 'display: none';
+          document.getElementById('usernameDisplay').innerHTML = input.value;
+        }
+      })
 
       document.getElementById('messageForm').addEventListener('submit', (e) => {
+        const input = document.getElementById('messageInput');
         e.preventDefault();
         if (input.value) {
           socket.emit('chat', input.value);
@@ -23,9 +36,9 @@
         }
       });
 
-      socket.on('chat', (chat) => {
+      socket.on('chat', ({ chat, username }) => {
         const messageLi = document.createElement('li');
-        const messageText = document.createTextNode(chat);
+        const messageText = document.createTextNode(username + ": " + chat);
         messageLi.appendChild(messageText);
         document.getElementById('messages').appendChild(messageLi);
       });
